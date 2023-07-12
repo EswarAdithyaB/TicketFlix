@@ -1,0 +1,27 @@
+.Theater{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    align-items: center;
+}
+.theaterName{
+    flex:3;
+    display:flex;
+    justify-content: center;
+    text-align: center;
+}
+.theaterName span{
+    font-size: 2vw;
+    font-weight: 500;
+}
+.showTimes{
+    flex:7;
+}
+@media screen and (max-width:700px) {
+    .theaterName span{
+        font-size: 5vw;
+    }
+}

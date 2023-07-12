@@ -1,0 +1,18 @@
+.showTimes{
+    padding: 20px;
+}
+.lang{
+    font-size: 20px;
+    font-weight: 700;
+}
+.Times{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width:700px) {
+    .showTimes{
+    padding: 10px;
+    }
+}

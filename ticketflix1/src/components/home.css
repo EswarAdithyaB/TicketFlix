@@ -1,0 +1,54 @@
+.home{
+    display: flex; 
+    overflow-x: auto;
+    background-color: rgb(255, 255, 255);
+  }
+  .popularTitle{
+display: flex;
+justify-content: space-between;
+width:100%;
+overflow: hidden;
+
+  }
+  .left{
+    position: relative;
+    overflow: hidden;
+    font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 10px;
+    width: 50%;
+  }
+.right{
+    position: relative;
+    overflow: hidden;
+    font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 10px;
+}
+.city-container{
+    padding:30px 50px;
+    background-color: rgb(240, 240, 240);
+    margin: 0 30px;
+    border-radius: 20px;
+    text-align: center;
+}
+.titleCity{
+    font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+.city{
+    font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    display: inline-block;
+    padding: 20px 20px;
+    margin: 15px 40px;
+    border: 1px solid #999999;
+    border-radius: 10px;
+}

@@ -1,0 +1,68 @@
+.sidebar {
+    flex: 3;
+    height: fit-content;
+    margin: 20px 50px;
+    padding-bottom: 30px;
+    background-color: #fdfbfb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  
+  }
+  .sidebarTitlemain{
+    font-family: "Varela Round", sans-serif;
+    align-self: center;
+    font-size: 21px;
+    margin: 5px;
+    padding: 5px;
+    font-weight: 600;
+  }
+  .sidebarItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .sidebarTitle {
+    margin: 5px;
+    padding: 5px;
+    padding-left:20px ;
+    font-family: "Varela Round", sans-serif;
+    font-size: 20px;
+    line-height: 19px;
+    padding-right: 30px;
+    color: #222222;
+    font-weight: 500;
+  }
+  
+  .option{
+    display: inline-block;
+  }
+  .lan{
+    display: flex;
+    flex-direction: row;
+
+    background-color: #fdfbfb;
+    color: #222222;
+    padding: 0 20px;
+  }
+  .lan input{
+    display: inline;
+    flex:5;
+  }
+  .lan label{
+    display: inline-block;
+    flex:2;
+    padding-left: 20px;
+  }
+  .lanes{
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 0.5s;
+  }
+  .lanes.act{
+    max-height: 100px;
+  }
+  .lanes.act1{
+    max-height: 150px;
+  }

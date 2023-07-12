@@ -1,0 +1,110 @@
+.hero_body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: "Roboto";
+    list-style: none;
+    box-sizing: border-box;
+    background: #000000;
+  }
+  section {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .bg img {
+    width: 110vw;
+    height: 110vh;
+    filter: brightness(0.6);
+  }
+  
+  .rock1 {
+    position: absolute !important;
+    left: 10vw !important;
+    top: 20vh !important;
+  }
+  
+  .rock1 img {
+    width: 40%;
+    filter: brightness(0.5);
+  }
+  
+  .text h1 {
+    font-family: "AlphaCentauri" !important;
+    font-size: 4vw;
+    color: #fff;
+    letter-spacing: 20px;
+    position: absolute;
+    top: 35vh;
+    left: 34vw;
+    text-align: center;
+  }
+  
+  .earth img {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 34vw;
+    top: 25vh;
+    z-index: 1;
+    filter: brightness(0.7);
+  }
+  
+  .mid {
+    left: -150px !important;
+    bottom: -100px !important;
+    top: unset !important;
+  }
+  
+  .mid img {
+    width: 100%;
+    z-index: 2;
+    left: -200px;
+    top: 10vh !important;
+    filter: brightness(0.8);
+  }
+  
+  .fore {
+    right: -50px !important;
+    bottom: -200px !important;
+    top: 0px !important;
+    left: unset !important;
+  }
+  
+  .fore img {
+    width: 400px;
+    height: 110vh;
+    z-index: 3;
+    filter: brightness(0.5);
+  }
+  
+  @media  screen and (max-width:600px) {
+      .fore{
+          top: 250px !important;
+      }
+      .fore img{
+          width: 200px;
+          height: 45vh;
+      }
+      .earth img{
+          left: 24vw;
+          top: 30vh;
+          height: 300px;
+          width: 300px;
+      }
+      section {
+          height: 68vh;
+          overflow: hidden;
+      }
+      .mid{
+          bottom: -37px !important;
+      }
+      .bg img {
+          height: 70vh;
+      }
+      .text h1{
+          font-size: 6vw;
+          letter-spacing: 10px;
+          top:40vh;
+      }
+  }

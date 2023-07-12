@@ -1,0 +1,21 @@
+.poster img{
+    width:1440px;
+    object-fit: cover; 
+    border-radius: 0;
+}
+.movieBooking{
+    background-color: #dddddd;
+}
+.poster{
+    background-color: aliceblue;
+}
+.bodyMovieBooking{
+    min-height: 1000px;
+    background-color: #dddddd;
+}
+@media screen and (max-width:700px) {
+    .poster img{
+        width:390px;
+        object-fit: fill;
+    }
+}
