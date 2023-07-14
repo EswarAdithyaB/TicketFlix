@@ -16,7 +16,6 @@ const Offers = () => {
       if (slideIndex >= slides.length) {
         setSlideIndex(1);
       }
-      console.log(slideIndex);
       slides[slideIndex - 1].style.display = "block";
     };
 

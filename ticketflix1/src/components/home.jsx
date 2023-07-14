@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { useContext, useRef } from "react";
+import { Context } from "../context/Context";
 import Movies from './movies';
 import Sidebar from './sidebar';
 import Navbar from './navbar';
@@ -6,6 +8,9 @@ import ParallaxComponent from './hero';
 import Offers from './offers';
 import './home.css'
 export default function Home() {
+  
+    const { user, dispatch, isFetching } = useContext(Context);
+    console.log(user);
     useEffect(() => {
         const handleScroll = () => {
           let pos = window.scrollY;
@@ -27,7 +32,6 @@ export default function Home() {
             pos-=y;
             l1.style.right = `${pos*z}px`;
             l2.style.left = `${pos*z}px`;
-            console.log(pos)
           }
         };
         window.addEventListener('scroll', handleScroll);

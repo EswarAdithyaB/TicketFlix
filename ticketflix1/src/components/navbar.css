@@ -40,7 +40,7 @@ header .menu{
   align-items: center;
 }
 
-header .menu a{
+header .menu a,.profile{
   color: #fff;
   font-size: 16px;
   font-weight: 500;
@@ -51,18 +51,66 @@ header .menu a{
   transition: 0.3s;
   transition-property: color, background;
 }
+header .menu .profile{
+  display: flex;
+  align-items: center;
+  background-color: #000;
+}
 
 header .menu a:hover{
   color: #000;
   background: #fff;
 }
 
+header .menu .profile :hover{
+  color: #000;
+  background: #fff;
+}
 header .btn{
   color: #fff;
   font-size: 25px;
   cursor: pointer;
   display: none;
 }
+header .menu .m.active{
+  position: fixed;
+  display: block;
+  background: #000;
+  flex-direction: column;
+  min-width: 200px;
+  max-height: 200vh;
+  top: 90px;
+  right: 0;
+  padding: 30px 10px;
+  transition: 0.5s;
+  color: #fff;
+  transition-property: top;
+  background-color: #000;
+}
+  .m
+{
+  top:-200px;
+  display: none;
+  background-color: #fff;
+}
+.m .p
+{
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  margin: 0 30px;
+  padding: 10px 10px;
+  border-radius: 20px;
+  transition: 0.3s;
+  transition-property: color, background;
+}
+
+header .m .p:hover{
+  color: #000;
+  background: #fff;
+}
+
 
 @media (max-width: 1060px){
   header .btn{
@@ -86,6 +134,7 @@ header .btn{
     transition: 0.5s;
     transition-property: top;
   }
+
 
   header .menu.active{
     top: 0;
