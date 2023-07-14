@@ -4,14 +4,15 @@ import { FcGoogle } from 'react-icons/fc';
 import axios from "axios";
 import { useContext, useRef } from "react";
 import { Context } from "../context/Context";
-
 import Background from './background';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {  
+const navigate = useNavigate();
 const [isSignUpActive, setIsSignUpActive] = useState(false);
 const userRef = useRef();
 const passwordRef = useRef();
-const { dispatch, isFetching } = useContext(Context);
+const { user, dispatch, isFetching } = useContext(Context);
 const [username, setUsername] = useState("");
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
@@ -42,20 +43,25 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   dispatch({ type: "LOGIN_START" });
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
       username: userRef.current.value,
       password: passwordRef.current.value,
     });
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-    console.log(res._id);
+    console.log(res.data);
+    navigate('/');
     
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE" });
-    console.log("fail");
+    console.log(user);
   }
 };
 
-
+const handleSubmit2 = async (e) => {
+  e.preventDefault();
+    dispatch({ type: "LOGOUT" });
+    console.log(user);
+};
   const handleSignUpClick = () => {
     setIsSignUpActive(true);
   };
