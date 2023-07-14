@@ -1,15 +1,59 @@
+
+
 const router = require("express").Router();
 const Movie = require("../models/Movies");
+const multer = require("multer");
+const fs = require("fs");
 
+
+const storage =multer.diskStorage({
+  destination:(req,file,cb)=>{
+    cb(null,'uploads');
+  },
+  filename:(req,file,cd)=>{
+    cd(null, file.originalname);
+  }
+});
+
+const upload =multer({storage:storage})
 //Create Movie
-router.post("/post", async (req, res) => {
-    const newMovie =new Movie(req.body);
-    try{
-        const savedMovie = await newMovie.save();
-        res.status(200).json(savedMovie);
-    }catch(err){
-        res.status(500).json(err);
-    }
+router.post('/post', upload.fields([
+  { name: 'photo1', maxCount: 1 },
+  { name: 'photo2', maxCount: 1 },
+]), (req, res) => {
+  // Extract the form data from the request body
+  const { moviename, languages, gener, decs, cities } = req.body;
+
+  // Extract the file paths from the uploaded images
+  const photo1Path = req.files['photo1'][0].path;
+  const photo2Path = req.files['photo2'][0].path;
+
+  // Create a new movie instance
+  const newMovie = new Movie({
+    moviename,
+    languages,
+    gener,
+    decs,
+    cities,
+    photo1:{ 
+      data:  fs.readFileSync(photo1Path),
+      contentType: "image/png",
+  },
+    photo2:{ 
+      data:  fs.readFileSync(photo2Path),
+      contentType: "image/png",
+  }
+  });
+
+  // Save the movie to the database
+  newMovie.save()
+    .then(savedMovie => {
+      res.status(200).json(savedMovie);
+    })
+    .catch(error => {
+      console.error('error reading or saving file',error);
+      res.status(500).json({ error: 'Error saving movie' });
+    });
 });
 
 // Delete Movie

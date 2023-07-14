@@ -22,13 +22,17 @@ const MovieSchema = new mongoose.Schema({
         type: Array,
         required: true,
     },
+    featured:{
+        type: Boolean,
+        required: true,
+    },
     photo1:{
-        type: String,
-        require: false,
+        data: Buffer,
+        contentType:String
     },
     photo2:{
-        type: String,
-        require: false,
+        data: Buffer,
+        contentType:String
     },
    },
 );

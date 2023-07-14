@@ -28,6 +28,12 @@ function Navbar() {
     setClicked1(!clicked1);
     console.log(clicked1);
 };
+
+const handleSubmit2 = async (e) => {
+  e.preventDefault();
+    dispatch({ type: "LOGOUT" });
+    console.log(user);
+};
   return (
     <div>
    <header className={isSticky?"sticky":""}>
@@ -52,7 +58,7 @@ function Navbar() {
               <div className={clicked? "am" : "a"}>
                 <div className='p'>Tickets</div>
                 <div className='p'>Edit profile</div>
-                <div className='p'>Logout</div>
+                <div className='p' onClick={handleSubmit2}>Logout</div>
               </div>
             </div>
             </>
