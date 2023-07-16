@@ -1,17 +1,17 @@
-
-
+const path = require("path");
 const router = require("express").Router();
 const Movie = require("../models/Movies");
 const multer = require("multer");
 const fs = require("fs");
 
 
+
 const storage =multer.diskStorage({
   destination:(req,file,cb)=>{
     cb(null,'uploads');
   },
-  filename:(req,file,cd)=>{
-    cd(null, file.originalname);
+  filename:(req,file,cb)=>{
+    return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
   }
 });
 
@@ -22,27 +22,20 @@ router.post('/post', upload.fields([
   { name: 'photo2', maxCount: 1 },
 ]), (req, res) => {
   // Extract the form data from the request body
-  const { moviename, languages, gener, decs, cities } = req.body;
-
-  // Extract the file paths from the uploaded images
-  const photo1Path = req.files['photo1'][0].path;
-  const photo2Path = req.files['photo2'][0].path;
+  const { moviename, languages, genere, decs, cities,featured } = req.body;
+  const { photo1, photo2 } = req.files;
 
   // Create a new movie instance
   const newMovie = new Movie({
     moviename,
     languages,
-    gener,
+    genere,
     decs,
     cities,
-    photo1:{ 
-      data:  fs.readFileSync(photo1Path),
-      contentType: "image/png",
-  },
-    photo2:{ 
-      data:  fs.readFileSync(photo2Path),
-      contentType: "image/png",
-  }
+    featured,
+    photo1:`http://localhost:5000/moviesimg/${photo1[0].filename}`,
+    photo2:`http://localhost:5000/moviesimg/${photo2[0].filename}`
+   
   });
 
   // Save the movie to the database
@@ -72,9 +65,13 @@ router.delete("/:id",async (req,res) =>{
 });
 
 //Get Movie
-router.get("/:id", async (req, res) => {
+router.get("/f/featured", async (req, res) => {
     try {
-      const movie = await Movie.findById(req.params.id);
+      const movie = await Movie.find(
+        {
+          featured:true,
+        }
+      );
       res.status(200).json(movie);
     } catch (err) {
       res.status(500).json(err);

@@ -1,42 +1,37 @@
+import { useEffect } from "react";
 import "./movie.css";
 
-export default function Movie({img}) {
+export default function Movie({movie}) {
+
   return (
-    <div className="post">
-      <img
-        className="postImg"
-        src={img}
-        alt=""
-      />
+    <div className="post">      
+    <img src={movie.photo1} alt="Movie" />
       <div className="postInfo">
         <div className="postCats">
+          {
+            movie.genere.map((g) =>(
           <span className="postCat">
-              Romantic
+              {g}
           </span>
-          <span className="postCat">
-              Action
-          </span>
+            ))
+          }
         </div>
         <div className="postTitle">
-            <h1>Adipurush</h1>
+            <h1>{movie.moviename}</h1>
             <button>Book Now</button>
         </div>
         <hr />
         <div className="languages">
+          {
+            movie.languages.map((l)=>
         <span className="language">
-            Hindi
+            {l}
         </span>
-        
-        <span className="language">
-            Telugu
-        </span>
+            )}
         </div>
       </div>
       <p className="postDesc">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-        officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-        fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-        atque, exercitationem quibusdam, reiciendis odio laboriosam?
+        {movie.decs}
       </p>
     </div>
   );

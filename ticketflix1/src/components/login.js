@@ -56,12 +56,6 @@ const handleSubmit = async (e) => {
     console.log(user);
   }
 };
-
-const handleSubmit2 = async (e) => {
-  e.preventDefault();
-    dispatch({ type: "LOGOUT" });
-    console.log(user);
-};
   const handleSignUpClick = () => {
     setIsSignUpActive(true);
   };

@@ -10,8 +10,8 @@ const MovieSchema = new mongoose.Schema({
         type: Array,
         require: false,
     },
-    gener: {
-        type: String,
+    genere: {
+        type: Array,
         require: true,
     },
     decs:{
@@ -27,12 +27,12 @@ const MovieSchema = new mongoose.Schema({
         required: true,
     },
     photo1:{
-        data: Buffer,
-        contentType:String
+        type: String,
+        required: true,
     },
     photo2:{
-        data: Buffer,
-        contentType:String
+        type: String,
+        required: true,
     },
    },
 );

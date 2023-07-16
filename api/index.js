@@ -21,6 +21,8 @@ async function main() {
 app.use("/api/theater", theaterRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/movie", moviesRoute);
+
+app.use('/moviesimg', express.static('uploads/'));
 app.listen(5000, () => {
   console.log("Backend is running");
 });
