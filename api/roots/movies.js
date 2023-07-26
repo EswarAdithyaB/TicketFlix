@@ -63,21 +63,29 @@ router.delete("/:id",async (req,res) =>{
         res.status(500).json(err);
     }
 });
-
-//Get Movie
-router.get("/f/featured", async (req, res) => {
-    try {
-      const movie = await Movie.find(
-        {
-          featured:true,
-        }
+router.get("/:moviename", async (req,res) =>{
+  const movien=req.params.moviename;
+  try{
+    const movie= await Movie.findOne(
+      {
+      moviename: movien,
+      }
       );
+      res.status(200).json(movie);
+  }
+  catch(err){
+    res.status(500).json(err);
+  }
+});
+//Get Movie
+router.get("/", async (req, res) => {
+    try {
+      const movie = await Movie.find();
       res.status(200).json(movie);
     } catch (err) {
       res.status(500).json(err);
     }
   });
-
   router.get("/cities/:city", async (req,res) => {
     const city=req.params.city;
     const lang = req.params.Lang;

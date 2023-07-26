@@ -54,7 +54,6 @@ header .menu a,.profile{
 header .menu .profile{
   display: flex;
   align-items: center;
-  background-color: #000;
 }
 
 header .menu a:hover{

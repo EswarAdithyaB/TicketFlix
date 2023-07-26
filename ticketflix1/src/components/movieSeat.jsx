@@ -57,6 +57,7 @@ const MovieSeatBooking = () => {
 
   const handleSeatClick = (rowIndex, seatIndex) => {
     if (!seats[rowIndex][seatIndex]) {
+      console.log(rowIndex,seatIndex);
       const newSelectedSeats = [...selectedSeats];
       const seatIdentifier = `${rowIndex}-${seatIndex}`;
       const seatIndexInSelectedSeats = newSelectedSeats.indexOf(seatIdentifier);

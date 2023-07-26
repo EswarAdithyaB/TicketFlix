@@ -52,7 +52,9 @@ background: black;
 .seat.occupied {
   background-color: #fff;
 }
-
+.row:nth-of-type(10){
+  margin-bottom: 20px;
+}
 .seat:nth-of-type(8) {
   margin-right: 18px;
 }

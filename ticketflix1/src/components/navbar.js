@@ -37,16 +37,16 @@ const handleSubmit2 = async (e) => {
   return (
     <div>
    <header className={isSticky?"sticky":""}>
-      <a href="#" className="brand">Brand</a>
+      <Link to="/" className="brand">Brand</Link>
       <div className={clicked ? "menu active" : "menu"}>
         <div className='btn close-btn' onClick={handleClick}>
         <RxCross2 size={30}/>
         </div>
-        <a href="#">Home</a>
+        <Link to='/'>Home</Link>
         <a href="#">About</a>
         {
           user === null ?
-        <Link to="login">Login/SignUp</Link>:
+        <Link to="/login">Login/SignUp</Link>:
         <>
         <div className='profile'> 
           {user.username}

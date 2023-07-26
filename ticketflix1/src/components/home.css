@@ -28,7 +28,7 @@ overflow: hidden;
     margin-top: 10px;
 }
 .city-container{
-    padding:30px 50px;
+    padding:30px 200px;
     background-color: rgb(240, 240, 240);
     margin: 0 30px;
     border-radius: 20px;
@@ -42,13 +42,4 @@ overflow: hidden;
     overflow: hidden;
     flex-direction: column;
 }
-.city{
-    font-family: "Josefin Sans", Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    display: inline-block;
-    padding: 20px 20px;
-    margin: 15px 40px;
-    border: 1px solid #999999;
-    border-radius: 10px;
-}
+

@@ -28,3 +28,8 @@ export const LoginStart = (userCredentials) => ({
   export const UpdateFailure = () => ({
     type: "UPDATE_FAILURE",
   });
+
+  export const UpdateCity = (city) => ({
+    type: "UPDATE_CITY",
+    payload: city,
+  })

@@ -1,47 +1,41 @@
-const mongoose =require("mongoose");
-const SeatesSchema = new mongoose.Schema({
-    seates: {
-        type: Array,
-        require: true,
-    },
-    showtime:{
-        type: String,
-        require: true,
-    },
-    language:{
-        type: String,
-        require: true,
-    },
-    typeofScreen:{
-        type: String,
-        require:true,
-    }
-   },
-);
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const TheatersSchema = new mongoose.Schema({
-    Theatername:{
-        type:String,
-        required:true,
-        unique:true,
-    },
-    shows:{
-        type:[SeatesSchema],
-        required:true,
-    },
-    cityname:{
-        type:String,
-        required:true,
-    },
-    movieName:{
-        type:String,
-        required:true,
-    },
-    screenNumber:{
-        type:String,
-        required:false,
-    }
-   },
-);
+const Seates = require("./Seates"); // Corrected the import path
+
+const TheatersSchema = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+  Theatername: {
+    type: String,
+    required: true,
+  },
+  languages: {
+    type: [String],
+    required: true,
+  },
+  shows: [{
+    type: Schema.Types.ObjectId,
+    ref: Seates, // Reference to the "Seates" model
+  }],
+  movieName: {
+    type: String,
+    required: true,
+  },
+  screenNumber: {
+    type: String,
+    required: false,
+  },
+  cityName: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  }
+});
 
 module.exports = mongoose.model("Theater", TheatersSchema);

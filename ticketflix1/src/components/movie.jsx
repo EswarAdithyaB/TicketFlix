@@ -1,8 +1,25 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+
 import "./movie.css";
+import { Context } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function Movie({movie}) {
-
+  const navigate = useNavigate();
+  const {user,dispath, city} = useContext(Context);
+  const handleClick =((name)=>{
+    if(!user)
+    {
+      alert("Please login before booking your ticktes");
+    }
+    else if(!city)
+    {
+      alert("Please select city");
+    }
+    else{
+      navigate(`/movie/${name}`);
+    }
+  })
   return (
     <div className="post">      
     <img src={movie.photo1} alt="Movie" />
@@ -18,7 +35,7 @@ export default function Movie({movie}) {
         </div>
         <div className="postTitle">
             <h1>{movie.moviename}</h1>
-            <button>Book Now</button>
+            <button onClick={()=>handleClick(movie.moviename)}>Book Now</button>
         </div>
         <hr />
         <div className="languages">
