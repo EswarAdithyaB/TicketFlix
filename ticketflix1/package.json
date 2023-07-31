@@ -36,6 +36,9 @@
       "react-app/jest"
     ]
   },
+  "resolutions": {
+    "react": "18.2.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
