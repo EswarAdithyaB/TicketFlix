@@ -35,6 +35,9 @@ const TheatersSchema = new Schema({
   date: {
     type: Date,
     required: true,
+  },
+  dateNo: {
+    type: Number,
   }
 });
 

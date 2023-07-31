@@ -19,6 +19,10 @@ const SeatesSchema = new mongoose.Schema({
     typeofScreen:{
         type: String,
         require:true,
+    },
+    screenNo:{
+        type: Number,
+        require:true
     }
    },
 );

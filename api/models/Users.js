@@ -1,5 +1,6 @@
+const Ticket = require("./Ticket");
 const mongoose =require("mongoose");
-
+const { Schema } = mongoose;
 const UserSchema = new mongoose.Schema({
     username:{
         type:String,
@@ -15,6 +16,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    ticket: {
+        type: [Schema.Types.ObjectId],
+        ref: Ticket,
+    }
    },
   { timestamps: true }
 );

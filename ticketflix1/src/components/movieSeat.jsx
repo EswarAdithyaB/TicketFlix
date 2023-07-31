@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, {useContext, useState, useEffect } from 'react';
 import './movieseat.css'
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { Context } from '../context/Context'
 const MovieSeatBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(0);
-  const [selectedMoviePrice, setSelectedMoviePrice] = useState(10);
-  const [ticketPrice, setTicketPrice] = useState(10);
-
-  const seats = [
+  const [selectedMoviePrice, setSelectedMoviePrice] = useState(100);
+  const [ticketPrice, setTicketPrice] = useState(100);
+  const [showdetails,setShowdetails]= useState([]);
+  const location= useLocation();
+  const {user,dispatch,city}= useContext(Context);
+  const [seats,setSeats]= useState( [
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
@@ -27,7 +32,7 @@ const MovieSeatBooking = () => {
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
-  ];
+  ]);
 
   useEffect(() => {
     const storedSelectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
@@ -46,14 +51,71 @@ const MovieSeatBooking = () => {
     }
   }, []);
 
+  useEffect(() =>{
+    const screenId=(location.pathname.split("/")[4]);
+    const getScreendetails = async() =>{
+      try{
+        const res = await axios.get(`http://localhost:5000/api/theater/screen/${screenId}`);
+        setShowdetails(res.data)
+      }
+      catch(err){
+        console.log("fail");
+        console.log(err.response);
+      }
+      }
+      getScreendetails();
+  },[]);
+
+  useEffect(() =>{
+
+    let newSeates = seats;
+    if(showdetails !== undefined && showdetails.seates !== undefined){
+      console.log(showdetails.seates);
+      showdetails.seates.forEach((s) =>{
+      const temp=s.split('-')
+      newSeates[parseInt(temp[0])][parseInt(temp[1])]=true;
+    });
+    setSeats(newSeates);
+    }
+  },[showdetails]);
+  
   useEffect(() => {
     localStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+    
   }, [selectedSeats]);
 
   useEffect(() => {
-    localStorage.setItem('selectedMovieIndex', selectedMovieIndex);
+    if(selectedSeats.length!==0)
+    {
+    const p=parseInt(selectedSeats[0].split('-')[0]);
+    if(p>=10){
+      setSelectedMoviePrice(150);
+      setTicketPrice(150);
+    }
+    else{
+      setSelectedMoviePrice(100);
+      setTicketPrice(100);
+    }
     localStorage.setItem('selectedMoviePrice', selectedMoviePrice);
-  }, [selectedMovieIndex, selectedMoviePrice]);
+    }
+  }, [selectedSeats]);
+
+  const handleBooking = async() => {
+    const screenId=(location.pathname.split("/")[4]);
+    try{
+      const res = await axios.post(`http://localhost:5000/api/theater/ticket/${screenId}`,
+      {
+        selectedseates:selectedSeats,
+        user: user
+      });
+      window.location.reload(false);
+      setSelectedSeats([]);
+      console.log(res.data);
+    }catch(err){
+      console.log("fail");
+    }
+
+  }
 
   const handleSeatClick = (rowIndex, seatIndex) => {
     if (!seats[rowIndex][seatIndex]) {
@@ -121,12 +183,12 @@ const MovieSeatBooking = () => {
       </div>
     
       <p className="text">
-        You have selected <span id="count">{calculateSelectedSeatsCount()}</span> seats for a price of $
+        You have selected <span id="count">{calculateSelectedSeatsCount()}</span> seats for a price of Rs
         <span id="total">{calculateTotalPrice()}</span>
       </p>
       
     
-    <a href="#" className="neon-button">Book Now</a>
+    <a href="#" className="neon-button" onClick={() => handleBooking()}>Book Now</a>
     </div>
     </>
   );

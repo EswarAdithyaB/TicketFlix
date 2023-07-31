@@ -63,7 +63,6 @@ export default function MovieBooking() {
         console.log(err.response);
       }}
       feachPost();
-      console.log(data);
   },[]);
   const [nextThreeDays, setNextThreeDays] = useState([]);
 
@@ -83,14 +82,12 @@ export default function MovieBooking() {
   const getTheaters = async() =>{
     const today = moment();
     const date=today.clone().add(selectedDate, 'days').format('yyyy MM DD');
-    console.log("date -d:",date);
     try{
       const res = await axios.get(`http://localhost:5000/api/theater/${movie}`,        
       {params:{
         city:city,
         date:date,
       }});
-      console.log(res.data)
       setTheatersData(res.data);
     }catch(err) {
       console.log("fail");
@@ -100,15 +97,14 @@ export default function MovieBooking() {
   const handleSelectDate = (event, value) =>
   { 
     const today = moment(); 
-    const date=(selectedDate==value) ? null : setSelectedDate(value);
-    console.log(selectedDate);
+    setSelectedDate(value);
   }
 
   // temp
   useEffect(() =>{
     getTheaters();
-    console.log(selectedDate);
   },[selectedDate]);
+
   useEffect(() => {
     const handleRefresh = async () => {
       const today = moment();
@@ -118,9 +114,6 @@ export default function MovieBooking() {
   handleRefresh();
 }, []);
 
-useState(() =>{
-  console.log(theatersData);
-},[theatersData]);
 
   return (
     <>
@@ -150,9 +143,10 @@ useState(() =>{
             </ToggleButtonGroup>
             </div>
         </div>
-            { theatersData.map((d) => (
-            <Theater data={d}/>
-            ))}
+            { theatersData.map((d) => {
+            return <Theater key={d.id} data={d}/>
+            
+            })}
             .
         </div>
         <div>

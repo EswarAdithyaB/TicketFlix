@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const router = require("express").Router();
 const Theater = require("../models/Theaters");
 const Seates =require("../models/Seates");
+const Theaters = require("../models/Theaters");
+const Ticket = require("../models/Ticket");
+const Users = require("../models/Users");
 //post
 router.post("/post/Theater", async (req, res) => {
     const {Theatername,languages,movieName,screenNumber,cityName,date}=req.body;
@@ -70,9 +73,6 @@ try {
 router.get("/:movie",async(req,res) =>{
   const movie=req.params.movie;
   const city=req.query.city;
-  console.log(req.query.date);
-  console.log(req.query.city);
-  
   const da= new Date(req.query.date);
   try{
     const theaters = await Theater.find(
@@ -88,7 +88,67 @@ router.get("/:movie",async(req,res) =>{
     res.status(500).json(err);
 }
 });
+router.get("/screen/:id",async(req,res) =>{
+  try{
+    const show= await Seates.findById(req.params.id);
+    res.status(200).json(show);
+  }catch(err){
+    res.status(500).json(err);
+  }
+})
 
+router.post("/ticket/:id",async(req,res) => {
+  
+  console.log(req.body);
+  selectedseates=req.body.selectedseates;
+  try{
+    const show = await Seates.findById(req.params.id)
+    const theater = await Theaters.findOne({
+      shows: { $in: [req.params.id] },
+    })
+    const newTicket = new Ticket({
+      moviename: theater.movieName,
+      date: theater.date,
+      showtime: show.showtime,
+      seates: [...selectedseates],
+      language: show.language,
+      typeofScreen: show.typeofScreen
+    });
+    const savedticket = await newTicket.save();
+    const user= req.body.user;
+    const u=await Users.findById(user._id)
+    if(u){
+      console.log(u);
+      if (!(u.ticket)) {
+        u.ticket=[savedticket._id];
+      }
+      else{
+        u.ticket.push(savedticket._id);
+      }
+      await u.save();
+    }
+    else{
+      console.log("user not found");
+    }
+    
+    if (show) {
+      if (!show.seates) {
+        show.seates = [selectedseates]; // Initialize as an empty array if it doesn't exist
+      }
+      else{
+        selectedseates.forEach((s) =>{
+        show.seates.push(s);
+        }
+        )
+      }
+      await show.save();
+    }
+
+    res.status(200).json(show);
+  }catch(err){
+    res.status(500).json(err.message);
+  }
+})
 
 router.get("/seates/:id",async(req,res) =>{
   try{

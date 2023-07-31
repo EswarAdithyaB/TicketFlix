@@ -53,7 +53,7 @@ const handleSubmit = async (e) => {
     
   } catch (err) {
     dispatch({ type: "LOGIN_FAILURE" });
-    console.log(user);
+    alert("Wrong credentials!");
   }
 };
   const handleSignUpClick = () => {

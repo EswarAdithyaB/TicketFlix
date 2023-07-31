@@ -8,7 +8,6 @@ export default function Times({show}) {
     localStorage.setItem('selectedSeats',JSON.stringify(""));
     navigate(`./show/${show._id}`);
   })
-  console.log(show)
   return (
     <div className='times' onClick={()=>handelBooking()}>
       <span className='time'>{show.showtime}</span>
