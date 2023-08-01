@@ -83,11 +83,7 @@ export default function MovieBooking() {
     const today = moment();
     const date=today.clone().add(selectedDate, 'days').format('yyyy MM DD');
     try{
-      const res = await axios.get(`https://movieuniverseapi.onrender.com/api/theater/${movie}`,        
-      {params:{
-        city:city,
-        date:date,
-      }});
+      const res = await axios.get(`http://localhost:5000/api/theater/${movie}/${date}/${city}`);
       setTheatersData(res.data);
     }catch(err) {
       console.log("fail");

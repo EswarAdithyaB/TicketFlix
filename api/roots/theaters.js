@@ -70,10 +70,11 @@ try {
 }
 });
 
-router.get("/:movie",async(req,res) =>{
+router.get("/:movie/:date/:city",async(req,res) =>{
   const movie=req.params.movie;
-  const city=req.query.city;
-  const da= new Date(req.query.date);
+  const city=req.params.city;
+  const da= new Date(req.params.date);
+  console.log(city);
   try{
     const theaters = await Theater.find(
     {
