@@ -24,7 +24,7 @@ const handleSubmitregis = async (e) => {
   e.preventDefault();
   setError(false);
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/register", {
+    const res = await axios.post("https://movieuniverseapi.onrender.com/api/auth/register", {
       username,
       email,
       password,
@@ -43,7 +43,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   dispatch({ type: "LOGIN_START" });
   try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("https://movieuniverseapi.onrender.com/api/auth/login", {
       username: userRef.current.value,
       password: passwordRef.current.value,
     });
@@ -73,13 +73,13 @@ const handleSubmit = async (e) => {
         <form onSubmit={handleSubmitregis}>
           <h1>Create Account</h1>
           <div className="social-container">
-            <a href="#" className="social">
+            <a href="" className="social">
             <FaFacebook size={'2.5em'} color="#0165E1"/>
             </a>
-            <a href="#" className="social">
+            <a href="" className="social">
               <FcGoogle size={'2.5em'}/>
             </a>
-            <a href="#" className="social">
+            <a href="" className="social">
             <FaTwitter size={'2.5em'} color='#00acee'/>
             </a>
           </div>
@@ -113,13 +113,13 @@ const handleSubmit = async (e) => {
       <form className="loginForm" onSubmit={handleSubmit}>
           <h1>Log in</h1>
           <div className="social-container">
-            <a href="#" className="social">
+            <a href="" className="social">
             <FaFacebook size={'2.5em'} color="#0165E1"/>
             </a>
-            <a href="#" className="social">
+            <a href="" className="social">
             <FcGoogle size={'2.5em'}/>
             </a>
-            <a href="#" className="social">
+            <a href="" className="social">
             <FaTwitter size={'2.5em'} color='#00acee'/>
             </a>
           </div>
@@ -127,7 +127,7 @@ const handleSubmit = async (e) => {
           
           <input type="text" placeholder="Username" ref={userRef}/>
           <input type="password" placeholder="Password" ref={passwordRef}/>
-          <a href="#">Forgot your password?</a>
+          <a href="">Forgot your password?</a>
           <button type='submit' disabled={isFetching}>Log In</button>
           <div className='ghost-min'>
             <p>Don't have account</p>

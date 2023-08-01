@@ -41,18 +41,18 @@ const Offers = () => {
     <div className="slideshow-container">
       <div className="mySlides fade">
         <div className="numbertext">1 / 3</div>
-        <img src={p1} style={{ width: "100%" }} />
+        <img src={p1} style={{ width: "100%" }} alt="banner" />
       </div>
       <div className="mySlides fade">
         <div className="numbertext">2 / 3</div>
-        <img src={p2} style={{ width: "100%" }} />
+        <img src={p2} style={{ width: "100%" }} alt="banner" />
       </div>
       <div className="mySlides fade">
         <div className="numbertext">3 / 3</div>
-        <img src={p3} style={{ width: "100%" }} />
+        <img src={p3} style={{ width: "100%" }} alt="banner" />
       </div>
-      <a className="prev" onClick={() => plusSlides(-1)}>&#10094;</a>
-      <a className="next" onClick={() => plusSlides(1)}>&#10095;</a>
+      <div className="prev" onClick={() => plusSlides(-1)}>&#10094;</div>
+      <div className="next" onClick={() => plusSlides(1)}>&#10095;</div>
       <br />
       <div style={{ textAlign: "center" }}>
         <span className="dot" onClick={() => currentSlide(1)}></span>

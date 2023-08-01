@@ -98,7 +98,7 @@ const { dispatch, city } = useContext(Context);
     useEffect(()=>{
       const feachPost = async() =>{
       try{
-      const res = await axios.get("http://localhost:5000/api/movie/");
+      const res = await axios.get("https://movieuniverseapi.onrender.com/api/movie/");
       setData(res.data);
       } catch(err) {
         console.log("fail");

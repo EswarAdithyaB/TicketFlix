@@ -2,15 +2,17 @@ import React, {useContext, useState, useEffect } from 'react';
 import './movieseat.css'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Context } from '../context/Context'
 const MovieSeatBooking = () => {
+  const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(0);
   const [selectedMoviePrice, setSelectedMoviePrice] = useState(100);
   const [ticketPrice, setTicketPrice] = useState(100);
   const [showdetails,setShowdetails]= useState([]);
   const location= useLocation();
-  const {user,dispatch,city}= useContext(Context);
+  const {user}= useContext(Context);
   const [seats,setSeats]= useState( [
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
     [false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false,false, false, false,false, false, false, false, false, false, false, false],
@@ -55,7 +57,7 @@ const MovieSeatBooking = () => {
     const screenId=(location.pathname.split("/")[4]);
     const getScreendetails = async() =>{
       try{
-        const res = await axios.get(`http://localhost:5000/api/theater/screen/${screenId}`);
+        const res = await axios.get(`https://movieuniverseapi.onrender.com/api/theater/screen/${screenId}`);
         setShowdetails(res.data)
       }
       catch(err){
@@ -67,7 +69,6 @@ const MovieSeatBooking = () => {
   },[]);
 
   useEffect(() =>{
-
     let newSeates = seats;
     if(showdetails !== undefined && showdetails.seates !== undefined){
       console.log(showdetails.seates);
@@ -103,14 +104,16 @@ const MovieSeatBooking = () => {
   const handleBooking = async() => {
     const screenId=(location.pathname.split("/")[4]);
     try{
-      const res = await axios.post(`http://localhost:5000/api/theater/ticket/${screenId}`,
+      const res = await axios.post(`https://movieuniverseapi.onrender.com/api/theater/ticket/${screenId}`,
       {
         selectedseates:selectedSeats,
         user: user
       });
-      window.location.reload(false);
       setSelectedSeats([]);
       console.log(res.data);
+      alert(`pls pay the amount of ${calculateTotalPrice()}`);
+      alert("Booking confromed");
+      navigate("/");
     }catch(err){
       console.log("fail");
     }
@@ -188,7 +191,7 @@ const MovieSeatBooking = () => {
       </p>
       
     
-    <a href="#" className="neon-button" onClick={() => handleBooking()}>Book Now</a>
+    <div className="neon-button" onClick={() => handleBooking()}>Book Now</div>
     </div>
     </>
   );

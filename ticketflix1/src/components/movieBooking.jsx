@@ -50,13 +50,13 @@ export default function MovieBooking() {
   const classes = useStyles();
   const location= useLocation();
   const movie=(location.pathname.split("/")[2]);
-  const {user,dispatch,city}= useContext(Context);
+  const {city}= useContext(Context);
   const [theatersData, setTheatersData]=useState([]);
   const[data,setData]=useState([]);
   useEffect(()=>{
     const feachPost = async() =>{
       try{
-      const res = await axios.get(`http://localhost:5000/api/movie/${movie}`,{city: city});
+      const res = await axios.get(`https://movieuniverseapi.onrender.com/api/movie/${movie}`,{city: city});
       setData(res.data);
       } catch(err) {
         console.log("fail");
@@ -83,7 +83,7 @@ export default function MovieBooking() {
     const today = moment();
     const date=today.clone().add(selectedDate, 'days').format('yyyy MM DD');
     try{
-      const res = await axios.get(`http://localhost:5000/api/theater/${movie}`,        
+      const res = await axios.get(`https://movieuniverseapi.onrender.com/api/theater/${movie}`,        
       {params:{
         city:city,
         date:date,

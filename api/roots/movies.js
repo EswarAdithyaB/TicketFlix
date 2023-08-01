@@ -33,8 +33,8 @@ router.post('/post', upload.fields([
     decs,
     cities,
     featured,
-    photo1:`http://localhost:5000/moviesimg/${photo1[0].filename}`,
-    photo2:`http://localhost:5000/moviesimg/${photo2[0].filename}`
+    photo1:`https://movieuniverseapi.onrender.com/moviesimg/${photo1[0].filename}`,
+    photo2:`https://movieuniverseapi.onrender.com/moviesimg/${photo2[0].filename}`
    
   });
 

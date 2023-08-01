@@ -1,6 +1,5 @@
 import React from 'react';
 import ShowTimes from './showTimming';
-import { v4 as uuidv4 } from 'uuid';
 import './theater.css'
 export default function Theater({data}) {
   let keyCounter = 0;

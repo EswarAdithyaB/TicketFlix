@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './navbar.css';
 import { RxAvatar} from "react-icons/rx";
 import {RxCross2} from "react-icons/rx";
-import { useContext, useRef } from "react";
+import { useContext} from "react";
 import { Context } from "../context/Context";
 import { Link } from 'react-router-dom';
 import {LiaBarsSolid} from "react-icons/lia";
@@ -37,13 +37,13 @@ const handleSubmit2 = async (e) => {
   return (
     <div>
    <header className={isSticky?"sticky":""}>
-      <Link to="/" className="brand">Brand</Link>
+      <Link to="/" className="brand">TicketFlix</Link>
       <div className={clicked ? "menu active" : "menu"}>
         <div className='btn close-btn' onClick={handleClick}>
         <RxCross2 size={30}/>
         </div>
         <Link to='/'>Home</Link>
-        <a href="#">About</a>
+        <a href="">About</a>
         {
           user === null ?
         <Link to="/login">Login/SignUp</Link>:

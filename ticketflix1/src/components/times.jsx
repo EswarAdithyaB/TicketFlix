@@ -1,6 +1,6 @@
 import React from 'react'
 import './times.css'
-import { Link, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 export default function Times({show}) {
   const navigate = useNavigate();
   const handelBooking =(() =>{
